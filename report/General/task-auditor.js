@@ -391,6 +391,47 @@ async function generarTodosLosInformes() {
 
                 <script>
                     window.onload = function() {
+                        const valueLabelsPlugin = {
+                            id: 'valueLabels',
+                            afterDatasetsDraw(chart) {
+                                const { ctx } = chart;
+                                ctx.save();
+                                ctx.font = '700 7px Segoe UI, Arial, sans-serif';
+                                ctx.textAlign = 'center';
+                                ctx.textBaseline = 'middle';
+
+                                chart.data.datasets.forEach((dataset, datasetIndex) => {
+                                    const meta = chart.getDatasetMeta(datasetIndex);
+                                    meta.data.forEach((element, index) => {
+                                        const value = dataset.data[index];
+                                        if (value === null || value === undefined || value === 0) return;
+
+                                        const label = dataset.label === 'Avance (%)'
+                                            ? String(value) + '%'
+                                            : String(value);
+
+                                        if (chart.config.type === 'doughnut') {
+                                            const position = element.tooltipPosition();
+                                            ctx.fillStyle = '#ffffff';
+                                            ctx.fillText(label, position.x, position.y);
+                                            return;
+                                        }
+
+                                        const isHorizontal = chart.config.options?.indexAxis === 'y';
+                                        const position = element.tooltipPosition();
+                                        ctx.fillStyle = isHorizontal ? '#3d0b12' : '#3d0b12';
+                                        if (isHorizontal) {
+                                            ctx.textAlign = 'left';
+                                            ctx.fillText(label, position.x + 4, position.y);
+                                        } else {
+                                            ctx.fillText(label, position.x, position.y - 8);
+                                        }
+                                    });
+                                });
+                                ctx.restore();
+                            }
+                        };
+
                         new Chart(document.getElementById('chartDist').getContext('2d'), {
                             type: 'bar',
                             data: {
@@ -407,7 +448,8 @@ async function generarTodosLosInformes() {
                                 maintainAspectRatio: false,
                                 plugins: { legend: { display: false } },
                                 scales: { x: { beginAtZero: true, ticks: { font: { size: 7 } } }, y: { ticks: { font: { size: 7 } } } }
-                            }
+                            },
+                            plugins: [valueLabelsPlugin]
                         });
 
                         new Chart(document.getElementById('chartEstado').getContext('2d'), {
@@ -419,7 +461,8 @@ async function generarTodosLosInformes() {
                                     backgroundColor: ['#0d4a92', '#f89c3c', '#e5e7eb']
                                 }]
                             },
-                            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { boxWidth: 6, font: { size: 7 } } } } }
+                            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { boxWidth: 6, font: { size: 7 } } } } },
+                            plugins: [valueLabelsPlugin]
                         });
 
                         new Chart(document.getElementById('chartEvolucion').getContext('2d'), {
@@ -451,7 +494,8 @@ async function generarTodosLosInformes() {
                                     y1: { type: 'linear', position: 'left', min: 0, max: 100, ticks: { callback: v => v + '%', font: { size: 7 } } },
                                     x: { ticks: { font: { size: 7 } } }
                                 }
-                            }
+                            },
+                            plugins: [valueLabelsPlugin]
                         });
                     };
                 </script>

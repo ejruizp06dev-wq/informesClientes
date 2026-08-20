@@ -289,7 +289,7 @@ async function generarTodosLosInformes() {
                     .description-box { background: #fff5f6; border: 1px solid #f3c2ca; border-left: 4px solid #ce0a1e; padding: 8px 11px; margin-bottom: 8px; border-radius: 0 6px 6px 0; font-size: 12px; color: #5a1d25; }
                     .summary-box { background: #fff5f6; border: 1px solid #f3c2ca; border-left: 4px solid #ce0a1e; padding: 9px 12px; margin-bottom: 8px; border-radius: 6px; }
                     .summary-box h2 { margin: 0 0 3px 0; font-size: 12px; color: #3d0b12; text-transform: uppercase; }
-                    .summary-box p { margin: 0; color: #5a1d25; font-size: 12px; text-align: justify; }
+                    .summary-box p { margin: 0; color: #5a1d25; font-size: 12px; line-height: 1.45; text-align: left; white-space: normal; overflow-wrap: anywhere; }
                     
                     .kpi-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-bottom: 10px; }
                     .kpi-card { background: #ffffff; border: 1px solid #f3c2ca; padding: 10px 8px; border-radius: 8px; text-align: center; min-height: 44px; }

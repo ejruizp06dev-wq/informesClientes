@@ -56,12 +56,18 @@ function obtenerResumenPorProyecto(nombreProyecto) {
     if (!fs.existsSync(carpetaResumen)) return "Resumen no disponible (carpeta resumen-dev no encontrada).";
 
     const archivos = fs.readdirSync(carpetaResumen);
-    const proyectoLimpio = nombreProyecto.toLowerCase().replace(/[^a-z0-9]/g, '');
+    const normalizarNombreResumen = (valor) => valor
+        .toLowerCase()
+        .replace(/\.txt$/, '')
+        .replace(/^informe/, '')
+        .replace(/[^a-z0-9]/g, '')
+        .replace(/lappiz$/, '');
+    const proyectoLimpio = normalizarNombreResumen(nombreProyecto);
 
     for (const archivo of archivos) {
         if (archivo.endsWith('.txt')) {
-            const archivoLimpio = archivo.toLowerCase().replace(/[^a-z0-9]/g, '');
-            if (archivoLimpio.includes(proyectoLimpio) || proyectoLimpio.includes(archivoLimpio.replace('informe', ''))) {
+            const archivoLimpio = normalizarNombreResumen(archivo);
+            if (archivoLimpio === proyectoLimpio || archivoLimpio.includes(proyectoLimpio) || proyectoLimpio.includes(archivoLimpio)) {
                 try {
                     return fs.readFileSync(path.join(carpetaResumen, archivo), 'utf-8').trim();
                 } catch (e) {

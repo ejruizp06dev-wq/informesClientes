@@ -258,6 +258,14 @@ async function generarTodosLosInformes() {
             const totalEjec = itemsProcesados.reduce((acc, t) => acc + t.ejecutado, 0);
 
             const nombreArchivo = `Informe_${proyecto.name.replace(/[^a-z0-9]/gi, '_')}`;
+            const esAppEmvarias = proyecto.name.toLowerCase().includes('appemvarias');
+            const evolucionLabels = esAppEmvarias
+                ? ['agosto de 2026']
+                : ['junio de 2026', 'julio de 2026', 'agosto de 2026'];
+            const evolucionAvance = esAppEmvarias ? [100] : [30, 70, 100];
+            const evolucionSoportes = esAppEmvarias
+                ? [cantidadTareasSoporte]
+                : [2, 5, cantidadTareasSoporte];
             
             const htmlContent = `
             <!DOCTYPE html>
@@ -474,11 +482,11 @@ async function generarTodosLosInformes() {
                         new Chart(document.getElementById('chartEvolucion').getContext('2d'), {
                             type: 'bar',
                             data: {
-                                labels: ['junio de 2026', 'julio de 2026', 'agosto de 2026'],
+                                labels: ${JSON.stringify(evolucionLabels)},
                                 datasets: [{
                                     type: 'line',
                                     label: 'Avance (%)',
-                                    data: [30, 70, 100],
+                                    data: ${JSON.stringify(evolucionAvance)},
                                     borderColor: '#0078d4',
                                     backgroundColor: 'rgba(0, 120, 212, 0.2)',
                                     fill: true,
@@ -486,7 +494,7 @@ async function generarTodosLosInformes() {
                                 }, {
                                     type: 'bar',
                                     label: 'Soportes',
-                                    data: [2, 5, ${cantidadTareasSoporte}],
+                                    data: ${JSON.stringify(evolucionSoportes)},
                                     backgroundColor: '#a7f3d0',
                                     yAxisID: 'y'
                                 }]

@@ -124,10 +124,9 @@ async function aplicarMembrete(rutaPdfSalida) {
 
             const [contenido] = await salidaDoc.embedPages([paginaOriginal]);
             
-            // Zona segura para que el contenido nunca cubra el pie del membrete.
-            // El PDF usa coordenadas desde abajo; por eso el contenido debe iniciar
-            // por encima de la franja inferior reservada, sin offsets negativos.
-            const marginTop = 45;
+            // Zona segura única del membrete. Las coordenadas PDF parten desde abajo:
+            // el contenido queda entre la franja superior y el pie, sin solapamientos.
+            const marginTop = 90;
             const marginBottom = 145;
             const newWidth = width * 0.85;
             const newHeight = height - marginTop - marginBottom;
@@ -524,7 +523,8 @@ async function generarTodosLosInformes() {
                 path: rutaPdf,
                 format: 'A4',
                 printBackground: true,
-                margin: { top: '38mm', right: '13mm', bottom: '22mm', left: '13mm' }
+                // Los márgenes del membrete se aplican una sola vez en PDF-LIB.
+                margin: { top: '0mm', right: '0mm', bottom: '0mm', left: '0mm' }
             });
             await browser.close();
 

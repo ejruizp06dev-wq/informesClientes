@@ -423,6 +423,9 @@ async function generarTodosLosInformes() {
                                         if (isHorizontal) {
                                             ctx.textAlign = 'left';
                                             ctx.fillText(label, position.x + 4, position.y);
+                                        } else if (dataset.type === 'line') {
+                                            const labelY = position.y < 32 ? position.y + 16 : position.y - 12;
+                                            ctx.fillText(label, position.x, labelY);
                                         } else {
                                             ctx.fillText(label, position.x, position.y - 8);
                                         }
@@ -488,6 +491,7 @@ async function generarTodosLosInformes() {
                             options: {
                                 responsive: true,
                                 maintainAspectRatio: false,
+                                layout: { padding: { top: 18, right: 8, bottom: 8, left: 8 } },
                                 plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } } },
                                 scales: {
                                     y: { type: 'linear', position: 'right', beginAtZero: true, grid: { display: false }, ticks: { font: { size: 10 } } },

@@ -265,31 +265,31 @@ async function generarTodosLosInformes() {
                 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
                 <style>
                     @page { size: A4; margin: 0; }
-                    body { font-family: 'Segoe UI', Tahoma, Arial, sans-serif; color: #45141a; background: transparent; line-height: 1.25; font-size: 8pt; margin: 0; }
-                    .page { padding: 5px 10px; page-break-after: always; }
-                    .header { background: linear-gradient(135deg, #990816 0%, #ce0a1e 100%); color: #ffffff; padding: 10px 14px; border-radius: 10px; margin-bottom: 6px; }
-                    .header h1 { margin: 0; font-size: 12.5pt; }
-                    .description-box { background: #fff5f6; border: 1px solid #f3c2ca; border-left: 4px solid #ce0a1e; padding: 5px 8px; margin-bottom: 6px; border-radius: 0 6px 6px 0; font-size: 7.5pt; color: #5a1d25; }
-                    .summary-box { background: #fff5f6; border: 1px solid #f3c2ca; border-left: 4px solid #ce0a1e; padding: 6px 9px; margin-bottom: 6px; border-radius: 6px; }
-                    .summary-box h2 { margin: 0 0 2px 0; font-size: 8pt; color: #3d0b12; text-transform: uppercase; }
-                    .summary-box p { margin: 0; color: #5a1d25; font-size: 7.5pt; text-align: justify; }
+                    body { font-family: 'Segoe UI', Tahoma, Arial, sans-serif; color: #45141a; background: transparent; line-height: 1.3; font-size: 12px; margin: 0; }
+                    .page { padding: 2px 12px; page-break-after: always; }
+                    .header { background: linear-gradient(135deg, #990816 0%, #ce0a1e 100%); color: #ffffff; padding: 14px 18px; border-radius: 10px; margin-bottom: 8px; }
+                    .header h1 { margin: 0; font-size: 20px; }
+                    .description-box { background: #fff5f6; border: 1px solid #f3c2ca; border-left: 4px solid #ce0a1e; padding: 8px 11px; margin-bottom: 8px; border-radius: 0 6px 6px 0; font-size: 12px; color: #5a1d25; }
+                    .summary-box { background: #fff5f6; border: 1px solid #f3c2ca; border-left: 4px solid #ce0a1e; padding: 9px 12px; margin-bottom: 8px; border-radius: 6px; }
+                    .summary-box h2 { margin: 0 0 3px 0; font-size: 12px; color: #3d0b12; text-transform: uppercase; }
+                    .summary-box p { margin: 0; color: #5a1d25; font-size: 12px; text-align: justify; }
                     
-                    .kpi-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; margin-bottom: 6px; }
-                    .kpi-card { background: #ffffff; border: 1px solid #f3c2ca; padding: 5px; border-radius: 6px; text-align: center; }
-                    .kpi-card .number { font-size: 10.5pt; font-weight: 800; color: #990816; }
-                    .kpi-card .label { font-size: 5.5pt; color: #7a0f1b; text-transform: uppercase; font-weight: 700; margin-top: 1px; }
+                    .kpi-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-bottom: 10px; }
+                    .kpi-card { background: #ffffff; border: 1px solid #f3c2ca; padding: 10px 8px; border-radius: 8px; text-align: center; min-height: 44px; }
+                    .kpi-card .number { font-size: 22px; line-height: 1.1; font-weight: 800; color: #990816; }
+                    .kpi-card .label { font-size: 12px; line-height: 1.1; color: #7a0f1b; text-transform: uppercase; font-weight: 700; margin-top: 4px; }
 
-                    .chart-section { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; margin-bottom: 6px; }
-                    .chart-box { background: #fff8f9; border: 1px solid #f3c2ca; border-radius: 6px; padding: 4px; text-align: center; height: 115px; }
-                    .chart-box h3 { margin: 0 0 2px 0; font-size: 7.5pt; color: #3d0b12; }
-                    .chart-canvas-wrap { position: relative; width: 100%; height: 90px; }
+                    .chart-section { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-bottom: 10px; }
+                    .chart-box { background: #fff8f9; border: 1px solid #f3c2ca; border-radius: 8px; padding: 9px; text-align: center; height: 190px; }
+                    .chart-box h3 { margin: 0 0 6px 0; font-size: 12px; color: #3d0b12; }
+                    .chart-canvas-wrap { position: relative; width: 100%; height: 160px; }
 
-                    .section-title { font-size: 8.5pt; border-bottom: 2px solid #ce0a1e; padding-bottom: 2px; color: #3d0b12; margin: 8px 0 4px 0; font-weight: 800; }
-                    table { width: 100%; border-collapse: collapse; margin-bottom: 6px; font-size: 7.5pt; }
-                    th { background-color: #6f0a16; color: white; padding: 4px 6px; text-align: left; }
-                    td { padding: 3px 6px; border-bottom: 1px solid #f5d6dc; color: #5a1d25; }
+                    .section-title { font-size: 12px; border-bottom: 2px solid #ce0a1e; padding-bottom: 4px; color: #3d0b12; margin: 10px 0 6px 0; font-weight: 800; }
+                    table { width: 100%; border-collapse: collapse; margin-bottom: 8px; font-size: 12px; }
+                    th { background-color: #6f0a16; color: white; padding: 6px 8px; text-align: left; }
+                    td { padding: 5px 8px; border-bottom: 1px solid #f5d6dc; color: #5a1d25; }
                     tr:nth-child(even) { background-color: #fff2f4; }
-                    .badge { background: #fde7e9; color: #990816; padding: 2px 4px; border-radius: 3px; font-size: 6.5pt; font-weight: bold; }
+                    .badge { background: #fde7e9; color: #990816; padding: 3px 5px; border-radius: 3px; font-size: 12px; font-weight: bold; }
                 </style>
             </head>
             <body>
@@ -297,8 +297,8 @@ async function generarTodosLosInformes() {
                 <div class="page">
                     <div class="header">
                         <h1>REPORTE DE GESTIÓN</h1>
-                        <div style="font-size: 9pt; margin-top: 2px;">Proyecto: <strong>${escapeHtml(proyecto.name)}</strong></div>
-                        <div style="font-size: 7.5pt; opacity: 0.9;">Sprint asociado al periodo: ${CONFIG.fechaInicio} al ${CONFIG.fechaFin}</div>
+                        <div style="font-size: 12px; margin-top: 4px;">Proyecto: <strong>${escapeHtml(proyecto.name)}</strong></div>
+                        <div style="font-size: 12px; opacity: 0.9;">Sprint asociado al periodo: ${CONFIG.fechaInicio} al ${CONFIG.fechaFin}</div>
                     </div>
 
                     <div class="description-box">
@@ -335,9 +335,9 @@ async function generarTodosLosInformes() {
 
                 <!-- PÁGINA 2 -->
                 <div class="page">
-                    <div class="chart-box" style="height: 135px; margin-bottom: 6px;">
+                    <div class="chart-box" style="height: 230px; margin-bottom: 10px;">
                         <h3>Evolución mensual - Avance mensual de ejecución (%)</h3>
-                        <div class="chart-canvas-wrap" style="height: 110px;"><canvas id="chartEvolucion"></canvas></div>
+                        <div class="chart-canvas-wrap" style="height: 195px;"><canvas id="chartEvolucion"></canvas></div>
                     </div>
 
                     <div class="section-title">1. Historias de Usuario Registradas</div>
@@ -396,7 +396,7 @@ async function generarTodosLosInformes() {
                             afterDatasetsDraw(chart) {
                                 const { ctx } = chart;
                                 ctx.save();
-                                ctx.font = '700 7px Segoe UI, Arial, sans-serif';
+                                ctx.font = '700 12px Segoe UI, Arial, sans-serif';
                                 ctx.textAlign = 'center';
                                 ctx.textBaseline = 'middle';
 
@@ -447,7 +447,7 @@ async function generarTodosLosInformes() {
                                 responsive: true,
                                 maintainAspectRatio: false,
                                 plugins: { legend: { display: false } },
-                                scales: { x: { beginAtZero: true, ticks: { font: { size: 7 } } }, y: { ticks: { font: { size: 7 } } } }
+                                scales: { x: { beginAtZero: true, ticks: { font: { size: 10 } } }, y: { ticks: { font: { size: 10 } } } }
                             },
                             plugins: [valueLabelsPlugin]
                         });
@@ -461,7 +461,7 @@ async function generarTodosLosInformes() {
                                     backgroundColor: ['#0d4a92', '#f89c3c', '#e5e7eb']
                                 }]
                             },
-                            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { boxWidth: 6, font: { size: 7 } } } } },
+                            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } } } },
                             plugins: [valueLabelsPlugin]
                         });
 
@@ -488,11 +488,11 @@ async function generarTodosLosInformes() {
                             options: {
                                 responsive: true,
                                 maintainAspectRatio: false,
-                                plugins: { legend: { position: 'bottom', labels: { boxWidth: 6, font: { size: 7 } } } },
+                                plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } } },
                                 scales: {
-                                    y: { type: 'linear', position: 'right', beginAtZero: true, grid: { display: false }, ticks: { font: { size: 7 } } },
-                                    y1: { type: 'linear', position: 'left', min: 0, max: 100, ticks: { callback: v => v + '%', font: { size: 7 } } },
-                                    x: { ticks: { font: { size: 7 } } }
+                                    y: { type: 'linear', position: 'right', beginAtZero: true, grid: { display: false }, ticks: { font: { size: 10 } } },
+                                    y1: { type: 'linear', position: 'left', min: 0, max: 100, ticks: { callback: v => v + '%', font: { size: 10 } } },
+                                    x: { ticks: { font: { size: 10 } } }
                                 }
                             },
                             plugins: [valueLabelsPlugin]
@@ -516,7 +516,7 @@ async function generarTodosLosInformes() {
                 path: rutaPdf,
                 format: 'A4',
                 printBackground: true,
-                margin: { top: '50mm', right: '15mm', bottom: '30mm', left: '15mm' }
+                margin: { top: '38mm', right: '13mm', bottom: '22mm', left: '13mm' }
             });
             await browser.close();
 
